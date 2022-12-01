@@ -19,7 +19,11 @@ namespace CodeFirstApproach.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<EmployeeViewModel> employeeViewModels = employeeRepository.GetAllEmployees();
+
+
+
+            return View(employeeViewModels);
         }
 
         [HttpGet]
@@ -36,7 +40,9 @@ namespace CodeFirstApproach.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employeeViewModel)
         {
-            return View();
+            employeeRepository.Save(employeeViewModel);
+
+            return RedirectToAction("Index");
         }
 
 

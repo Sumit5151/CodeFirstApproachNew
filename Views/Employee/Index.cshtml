@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EmployeeViewModel>
+
+<table  class="table tbl-primary tbl-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department Name</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @{
+            foreach (var dept in @Model)
+            {
+                <tr>
+                    <td>@dept.Id</td>
+                    <td>@dept.Name</td>
+                    <td>@dept.Email</td>
+                    <td>@dept.DepartmentName</td>
+                </tr>
+            }
+
+        }
+
+
+
+    </tbody>
+
+</table>
