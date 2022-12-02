@@ -1,10 +1,14 @@
-﻿namespace CodeFirstApproach.ViewModels
+﻿using System.ComponentModel;
+
+namespace CodeFirstApproach.ViewModels
 {
     public class EmployeeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+
+        [DisplayName("Department")]
         public int DepartmentId { get; set; }        
         public string DepartmentName { get; set; }        
     }

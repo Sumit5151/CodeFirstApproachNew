@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<EmployeeViewModel>
 
-<table  class="table tbl-primary tbl-bordered">
+<table class="table tbl-primary tbl-bordered">
     <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
             <th>Department Name</th>
+            <th>Action</th>
+            <th>Action</th>
         </tr>
     </thead>
 
@@ -20,6 +22,9 @@
                     <td>@dept.Name</td>
                     <td>@dept.Email</td>
                     <td>@dept.DepartmentName</td>
+                    <td><a asp-action="Update" asp-controller="Employee" asp-route-id="@dept.Id">Update</a> </td>
+                    
+                    <td><a asp-action="Delete" asp-controller="Employee" asp-route-id="@dept.Id">Delete</a> </td>
                 </tr>
             }
 

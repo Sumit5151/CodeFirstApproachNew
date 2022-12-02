@@ -9,6 +9,10 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
         void Save(EmployeeViewModel employeeViewModel);
         List<EmployeeViewModel> GetAllEmployees();
 
+        EmployeeViewModel GetEmployeeById(int id);
+        void Update(EmployeeViewModel employeeViewModel);
+        void Delete(int id);
+
 
     }
 }

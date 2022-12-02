@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeFirstApproach.BAL.EmployeeRepository
 {
-    public class EmployeeRepository: IEmployeeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
 
         private readonly ApplicationContext db;
@@ -14,9 +14,9 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
         }
 
 
-       public List<Department> GetAllDepartments()
+        public List<Department> GetAllDepartments()
         {
-           var departments= db.Departments.ToList();
+            var departments = db.Departments.ToList();
             return departments;
         }
 
@@ -24,7 +24,7 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
         {
             Employee employee = new Employee();
 
-          
+
             employee.Name = employeeViewModel.Name;
             employee.Email = employeeViewModel.Email;
             employee.DepartmentId = employeeViewModel.DepartmentId;
@@ -38,11 +38,13 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
 
 
 
-      public List<EmployeeViewModel> GetAllEmployees()
+        public List<EmployeeViewModel> GetAllEmployees()
         {
             List<EmployeeViewModel> employeeViewModels = new List<EmployeeViewModel>();
 
-            List<Employee> employees= db.Employees.Include(emp=>emp.Department).ToList();
+            List<Employee> employees = db.Employees
+                                         .Include(e => e.Department)
+                                         .ToList();
 
             foreach (var employee in employees)
             {
@@ -53,12 +55,45 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
                 employeeViewModel.Email = employee.Email;
                 employeeViewModel.DepartmentId = employee.DepartmentId;
                 employeeViewModel.DepartmentName = employee.Department.Name;
-                
-
                 employeeViewModels.Add(employeeViewModel);
             }
             return employeeViewModels;
         }
 
+
+        public EmployeeViewModel GetEmployeeById(int id)
+        {
+            Employee employee = db.Employees.FirstOrDefault(Employees => Employees.Id == id);
+
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+
+            employeeViewModel.Id = employee.Id;
+            employeeViewModel.Name = employee.Name;
+            employeeViewModel.Email = employee.Email;
+            employeeViewModel.DepartmentId = employee.DepartmentId;
+
+            return employeeViewModel;
+
+        }
+
+        public void Update(EmployeeViewModel employeeViewModel)
+        {
+
+            Employee employee = db.Employees.FirstOrDefault(x => x.Id == employeeViewModel.Id);
+            employee.Name = employeeViewModel.Name;
+            employee.Email = employeeViewModel.Email;
+            employee.DepartmentId = employeeViewModel.DepartmentId;
+            db.SaveChanges();
+        }
+
+
+        public void Delete(int id)
+        {
+
+            Employee employee = db.Employees.FirstOrDefault(x => x.Id == id);
+
+            db.Employees.Remove(employee);
+            db.SaveChanges();
+        }
     }
 }
