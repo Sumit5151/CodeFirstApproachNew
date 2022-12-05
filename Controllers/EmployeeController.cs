@@ -26,6 +26,7 @@ namespace CodeFirstApproach.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+
             ViewBag.Departments = employeeRepository.GetAllDepartments();
 
             EmployeeViewModel employeeViewModel = new EmployeeViewModel();
@@ -35,9 +36,16 @@ namespace CodeFirstApproach.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeViewModel employeeViewModel)
         {
-            employeeRepository.Save(employeeViewModel);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid == true)
+            {
+                employeeRepository.Save(employeeViewModel);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Departments = employeeRepository.GetAllDepartments();
+                return View("CreateEmployee", employeeViewModel);
+            }
         }
 
 
@@ -73,6 +81,23 @@ namespace CodeFirstApproach.Controllers
 
 
 
+        [HttpGet]
+        public IActionResult IsEmailidIdInUse(string email)
+        {
+           var isEmailInUse=  employeeRepository.IsEmailidIdInUse(email);
 
-    }
+            if(isEmailInUse == true)
+            {
+                return Json("This email id is already taken, Please use another Email id");
+                
+            }
+            else
+            {
+                return Json(true);
+            }
+        }
+
+
+
+        }
 }

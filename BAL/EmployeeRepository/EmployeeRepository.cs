@@ -95,5 +95,13 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
             db.Employees.Remove(employee);
             db.SaveChanges();
         }
+
+
+
+        public bool IsEmailidIdInUse(string email)
+        {
+            var isEmailInUse = db.Employees.Any(x => x.Email == email);
+            return isEmailInUse;
+        }
     }
 }
