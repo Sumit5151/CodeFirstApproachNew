@@ -84,7 +84,7 @@ namespace CodeFirstApproach.Controllers
         [HttpGet]
         public IActionResult IsEmailidIdInUse(string email)
         {
-           var isEmailInUse=  employeeRepository.IsEmailidIdInUse(email);
+           var isEmailInUse=  employeeRepository.IsEmailIdInUse(email);
 
             if(isEmailInUse == true)
             {

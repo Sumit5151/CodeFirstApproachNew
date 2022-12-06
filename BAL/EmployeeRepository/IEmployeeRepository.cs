@@ -12,7 +12,7 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
         EmployeeViewModel GetEmployeeById(int id);
         void Update(EmployeeViewModel employeeViewModel);
         void Delete(int id);
-        bool IsEmailidIdInUse(string email);
+        bool IsEmailIdInUse(string email);
 
     }
 }

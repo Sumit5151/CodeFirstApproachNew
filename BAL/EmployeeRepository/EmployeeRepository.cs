@@ -98,7 +98,7 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
 
 
 
-        public bool IsEmailidIdInUse(string email)
+        public bool IsEmailIdInUse(string email)
         {
             var isEmailInUse = db.Employees.Any(x => x.Email == email);
             return isEmailInUse;

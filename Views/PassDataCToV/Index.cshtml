@@ -1,0 +1,42 @@
+﻿
+<p> First Name: @ViewData["FirstName"]</p>
+
+<br />
+<p> Last Name: @ViewData["LastName"]</p>
+
+<br />
+<p> Age: @ViewBag.Age</p>
+
+<br />
+<p> Salary: @ViewBag.Salary</p>
+
+
+
+
+
+
+
+
+<h3> Employee Information  using ViewData</h3>
+@{
+    var employeeViewData = ViewData["Employee"] as EmployeeViewModel;
+}
+Name: @employeeViewData.Name
+<br />
+Email: @employeeViewData.Email
+
+
+
+
+
+
+
+<h3> Employee Information  using ViewBag</h3>
+
+@{
+    var employeeViewBag = ViewBag.Employee;
+}
+
+Name: @employeeViewBag.Name
+<br/>
+Email: @employeeViewBag.Email
