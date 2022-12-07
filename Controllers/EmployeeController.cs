@@ -19,6 +19,7 @@ namespace CodeFirstApproach.Controllers
 
         public IActionResult Index()
         {
+
             List<EmployeeViewModel> employeeViewModels = employeeRepository.GetAllEmployees();
             return View(employeeViewModels);
         }
@@ -39,6 +40,8 @@ namespace CodeFirstApproach.Controllers
             if (ModelState.IsValid == true)
             {
                 employeeRepository.Save(employeeViewModel);
+
+                TempData["Message"] = "New Employee Added successfully";
                 return RedirectToAction("Index");
             }
             else
@@ -66,7 +69,7 @@ namespace CodeFirstApproach.Controllers
         public IActionResult Update(EmployeeViewModel employeeViewModel)
         {
             employeeRepository.Update(employeeViewModel);
-
+            TempData["Message"] = "Employee Updated successfully";
             return RedirectToAction("Index");
         }
 
@@ -75,7 +78,7 @@ namespace CodeFirstApproach.Controllers
         public IActionResult Delete(int id)
         {
             employeeRepository.Delete(id);
-
+            TempData["Message"] = "Employee Deleted successfully";
             return RedirectToAction("Index");
         }
 

@@ -9,7 +9,11 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("BrightDB3CS")
-    )) ;
+    ));
+
+builder.Services.AddSession(
+    options => options.IdleTimeout = TimeSpan.FromMinutes(20)
+    );
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
@@ -22,13 +26,13 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=PassDataCToV}/{action=Index}/{id?}");
+    pattern: "{controller=Employee}/{action=Index}/{id?}");
 
 app.Run();
