@@ -19,6 +19,8 @@ namespace CodeFirstApproach.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("Message","This is Index view");
+            
 
             List<EmployeeViewModel> employeeViewModels = employeeRepository.GetAllEmployees();
             return View(employeeViewModels);
@@ -28,10 +30,13 @@ namespace CodeFirstApproach.Controllers
         public IActionResult Create()
         {
 
+            var message = HttpContext.Session.GetString("Message");
+
+
             ViewBag.Departments = employeeRepository.GetAllDepartments();
 
             EmployeeViewModel employeeViewModel = new EmployeeViewModel();
-            return View("CreateEmployee",employeeViewModel);
+            return View("CreateEmployee", employeeViewModel);
         }
 
         [HttpPost]
@@ -60,7 +65,7 @@ namespace CodeFirstApproach.Controllers
 
             EmployeeViewModel employeeViewModel = employeeRepository.GetEmployeeById(id);
 
-           
+
 
             return View(employeeViewModel);
         }
@@ -74,7 +79,7 @@ namespace CodeFirstApproach.Controllers
         }
 
 
-       
+
         public IActionResult Delete(int id)
         {
             employeeRepository.Delete(id);
@@ -87,12 +92,12 @@ namespace CodeFirstApproach.Controllers
         [HttpGet]
         public IActionResult IsEmailidIdInUse(string email)
         {
-           var isEmailInUse=  employeeRepository.IsEmailIdInUse(email);
+            var isEmailInUse = employeeRepository.IsEmailIdInUse(email);
 
-            if(isEmailInUse == true)
+            if (isEmailInUse == true)
             {
                 return Json("This email id is already taken, Please use another Email id");
-                
+
             }
             else
             {
@@ -102,5 +107,7 @@ namespace CodeFirstApproach.Controllers
 
 
 
-        }
+        
+
+    }
 }

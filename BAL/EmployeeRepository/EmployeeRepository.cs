@@ -8,9 +8,11 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
     {
 
         private readonly ApplicationContext db;
-        public EmployeeRepository(ApplicationContext _db)
+        private readonly IHttpContextAccessor httpContextAccessor;
+        public EmployeeRepository(ApplicationContext _db, IHttpContextAccessor _httpContextAccessor)
         {
             this.db = _db;
+            this.httpContextAccessor = _httpContextAccessor;
         }
 
 
@@ -22,9 +24,12 @@ namespace CodeFirstApproach.BAL.EmployeeRepository
 
         public void Save(EmployeeViewModel employeeViewModel)
         {
+
+            var message = httpContextAccessor.HttpContext.Session.GetString("Message");
+            
+
+
             Employee employee = new Employee();
-
-
             employee.Name = employeeViewModel.Name;
             employee.Email = employeeViewModel.Email;
             employee.DepartmentId = employeeViewModel.DepartmentId;

@@ -1,8 +1,12 @@
 ﻿@model IEnumerable<EmployeeViewModel>
+@inject IHttpContextAccessor httpContextAccessor;
 
 
+    @{
+        var message = httpContextAccessor.HttpContext.Session.GetString("Message");    
+    }
 
-    
+    <h2>@message</h2>
     <h3>@TempData["Message"]</h3>
 
 
