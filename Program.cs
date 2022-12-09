@@ -1,6 +1,8 @@
+using CodeFirstApproach.BAL.AccountService;
 using CodeFirstApproach.BAL.EmployeeRepository;
 using CodeFirstApproach.DAL;
 using Microsoft.EntityFrameworkCore;
+
 
 
 
@@ -21,6 +23,7 @@ builder.Services.AddSession(
 
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IAccoutService, AccountService>();
 
 //add-migration Initialization
 var app = builder.Build();
