@@ -14,13 +14,15 @@ namespace CodeFirstApproach.Controllers
         }
 
 
-
+        public IActionResult Home()
+        {           
+            return View();
+        }
 
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("Message","This is Index view");
-         
+            HttpContext.Session.SetString("Message","This is Index view");        
 
 
             List<EmployeeViewModel> employeeViewModels = employeeRepository.GetAllEmployees();
