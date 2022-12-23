@@ -48,6 +48,6 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Employee}/{action=Home}/{id?}");
+    pattern: "{controller=EmployeeAjax}/{action=Index}/{id?}");
 
 app.Run();

@@ -62,6 +62,8 @@ namespace CodeFirstApproach.Controllers
 
                 if (user != null)
                 {
+                    HttpContext.Session.SetString("email",user.Email);
+
                    return  RedirectToAction("Index", "Employee");
                 }
                 else
@@ -70,6 +72,12 @@ namespace CodeFirstApproach.Controllers
                 }
             }
             return View(loginViewModel);
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction ("Home", "Employee");
         }
     }
 }
