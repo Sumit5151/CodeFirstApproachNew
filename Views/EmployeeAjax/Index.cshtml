@@ -1,36 +1,45 @@
 ﻿
 
+
+
+
+
+<button type="button" class="btn-primary btn" id="btnLoadAllEmployees">Load All Employees</button>
+
+<div id="indexDiv">
+</div>
+
+<div id="CreateEmployeeDiv">
+</div>
+
 <script>
-   
     $(document).ready(function(){
 
-        $("#btnLoadAllEmployees").click(    
-        function(){
+        $("#btnLoadAllEmployees").click(function(){
 
-            alert("Button is clicked");
+          var number=10;
+            $.ajax({
 
-            $.ajax(
-            
-            {
-                url:"",
-            }
-            
-            );
+                url:"/EmployeeAjax/LoadAllEmployess",
+                type:"GET",
+                data:{num:number},
+                success:function(data){
+                    //console.log(data);
+                    $("#indexDiv").html(data);
+                },
+                error:function(error){
+                    alert(error);
+                }
+
+            });
+
 
         });
-    });
-  
 
 
-    
-
+        });
 
 </script>
 
-
-<div id="indexDiv">
-    <button type="button" class="btn-primary btn" id="btnLoadAllEmployees">Load All Employees</button>
-
-</div>
 
 

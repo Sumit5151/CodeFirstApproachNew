@@ -15,6 +15,8 @@ namespace CodeFirstApproach.Controllers
         }
 
 
+
+
         public IActionResult Index()
         {
             return View();
@@ -22,14 +24,39 @@ namespace CodeFirstApproach.Controllers
 
 
 
-
-        public IActionResult LoadAllEmployess()
+        [HttpGet]
+        public PartialViewResult LoadAllEmployess(int num)
         {
             List<EmployeeViewModel> employeeViewModels = employeeRepository.GetAllEmployees();
 
             return PartialView("_LoadAllEmployees", employeeViewModels);
-            
+
         }
+
+
+
+        [HttpGet]
+        public PartialViewResult Create()
+        {
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+            @ViewBag.Departments = employeeRepository.GetAllDepartments();
+
+
+            return PartialView("_Create", employeeViewModel);
+
+        }
+
+
+        //[HttpPost]
+        //public PartialViewResult Create()
+        //{
+        //    EmployeeViewModel employeeViewModel = new EmployeeViewModel();
+        //    @ViewBag.Departments = employeeRepository.GetAllDepartments();
+
+
+        //    return PartialView("_Create", employeeViewModel);
+
+        //}
 
 
     }
