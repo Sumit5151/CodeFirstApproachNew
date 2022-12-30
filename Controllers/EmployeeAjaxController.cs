@@ -47,16 +47,24 @@ namespace CodeFirstApproach.Controllers
         }
 
 
-        //[HttpPost]
-        //public PartialViewResult Create()
-        //{
-        //    EmployeeViewModel employeeViewModel = new EmployeeViewModel();
-        //    @ViewBag.Departments = employeeRepository.GetAllDepartments();
+        [HttpPost]
+        public IActionResult Create(EmployeeViewModel employeeViewModel)
+        {
+            employeeRepository.Save(employeeViewModel);
+
+            return RedirectToAction("LoadAllEmployess");
+
+        }
 
 
-        //    return PartialView("_Create", employeeViewModel);
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            employeeRepository.Delete(id);
 
-        //}
+            return RedirectToAction("LoadAllEmployess");
+
+        }
 
 
     }
